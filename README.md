@@ -349,4 +349,4 @@ A factorial multiplies every positive integer up to a number. For example, `5! =
 - `Python Learn.py` - Python fundamentals examples, exercises, calculations, and interactive menu
 - `README.md` - This project guide and explanation of the examples
 
-This project is intended for learning and experimentation. Change the values, add examples, and run the program again to observe the results.
+This project is intended for learning and experimentation. Feel free to look around the code, run the examples, test different inputs, change the values, and add your own examples.
