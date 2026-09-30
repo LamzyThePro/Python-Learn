@@ -1,8 +1,36 @@
-# Python Learn
+# Python Learn: Beginner Python Tutorial and Practice
 
-A beginner-friendly Python fundamentals practice program. It contains small examples, comments, calculations, and an interactive command-line menu.
+An easy-to-follow **Python tutorial for beginners** with hands-on practice in Python basics, variables, data types, strings, numbers, input, conditionals, loops, functions, and simple math exercises.
+
+This free Python learning project is designed for people learning Python programming from scratch. Every example is kept in one readable file with comments and an interactive command-line menu, so you can run the code, change it, and immediately see what happens.
 
 The examples are intended to be read, run, changed, and run again so you can see how Python behaves.
+
+## Run Python Online
+
+**[Open the Python browser playground](index.html)** to edit and execute beginner Python examples directly on the web. It runs Python in your browser with Pyodide, so no local Python installation is needed.
+
+## What You Will Learn
+
+- Python syntax, variables, and basic data types
+- Strings, indexing, slicing, and string methods
+- Numbers, arithmetic operators, math, and user input
+- `if`, `elif`, `else`, comparisons, and logical operators
+- `for` loops, `while` loops, nested loops, and `break`
+- Python functions, parameters, return values, default arguments, and `*args`
+- Beginner exercises including even-number counting, geometry, physics, and factorials
+
+## Project Keywords
+
+Python for beginners, learn Python, Python basics, Python tutorial, Python practice, Python exercises, Python programming, coding for beginners.
+
+## Tags
+
+#Python #LearnPython #PythonForBeginners #PythonTutorial #PythonBasics #PythonPractice #PythonExercises #ProgrammingForBeginners
+
+## Find This Project
+
+This repository is a beginner-friendly Python learning project, Python basics tutorial, and Python practice collection for new programmers. It is useful for anyone searching for simple Python examples, beginner coding exercises, or an interactive way to learn Python programming.
 
 ## Running the Program
 

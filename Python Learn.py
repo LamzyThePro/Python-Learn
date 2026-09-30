@@ -223,23 +223,45 @@ def run_loops():
         number //= 2
 
 
+def run_functions():
+    def greet(name):
+        return f"Hello, {name}!"
+
+    def add(first_number, second_number=0):
+        return first_number + second_number
+
+    def multiply(*numbers):
+        total = 1
+        for number in numbers:
+            total *= number
+        return total
+
+    print(greet("Python learner"))
+    print("2 + 3 =", add(2, 3))
+    print("2 + 0 =", add(2))
+    print("2 * 3 * 4 =", multiply(2, 3, 4))
+    print("--------------------------------------------------------------------------")
+
+
 def run_all():
     run_hello_world()
     run_strings()
     run_math_and_input()
     run_conditions()
     run_loops()
+    run_functions()
 
 
 def show_main_menu():
     print("\nWhich topic would you like to explore?")
-    print("1) Hello World and basics");
+    print("1) Hello World and basics")
     print("2) Strings")
     print("3) Math, numbers, and input")
     print("4) Conditions")
     print("5) Loops")
-    print("6) Run all")
-    print("7) Exit")
+    print("6) Functions")
+    print("7) Run all")
+    print("8) Exit")
 
 
 def show_sub_menu(topic_name):
@@ -253,13 +275,14 @@ def main():
         show_main_menu()
         choice = input("Enter your topic choice: ").strip().lower()
 
-        if choice in ["7", "exit", "quit"]:
+        if choice in ["8", "exit", "quit"]:
             print("Goodbye!")
             return
 
         if choice in ["1", "hello", "hello world", "basics"]:
             show_sub_menu("Hello World and basics")
-            sub_choice = input("Enter your exact program choice: ").strip().lower()
+            sub_choice = input(
+                "Enter your exact program choice: ").strip().lower()
             if sub_choice in ["1", "main", "example"]:
                 run_hello_world()
             elif sub_choice in ["2", "all", "run all"]:
@@ -270,7 +293,8 @@ def main():
 
         elif choice in ["2", "strings", "string"]:
             show_sub_menu("Strings")
-            sub_choice = input("Enter your exact program choice: ").strip().lower()
+            sub_choice = input(
+                "Enter your exact program choice: ").strip().lower()
             if sub_choice in ["1", "main", "example"]:
                 run_strings()
             elif sub_choice in ["2", "all", "run all"]:
@@ -281,7 +305,8 @@ def main():
 
         elif choice in ["3", "math", "numbers", "input"]:
             show_sub_menu("Math, numbers, and input")
-            sub_choice = input("Enter your exact program choice: ").strip().lower()
+            sub_choice = input(
+                "Enter your exact program choice: ").strip().lower()
             if sub_choice in ["1", "main", "example"]:
                 run_math_and_input()
             elif sub_choice in ["2", "all", "run all"]:
@@ -292,7 +317,8 @@ def main():
 
         elif choice in ["4", "conditions", "if", "ifs"]:
             show_sub_menu("Conditions")
-            sub_choice = input("Enter your exact program choice: ").strip().lower()
+            sub_choice = input(
+                "Enter your exact program choice: ").strip().lower()
             if sub_choice in ["1", "main", "example"]:
                 run_conditions()
             elif sub_choice in ["2", "all", "run all"]:
@@ -303,7 +329,8 @@ def main():
 
         elif choice in ["5", "loops", "loop"]:
             show_sub_menu("Loops")
-            sub_choice = input("Enter your exact program choice: ").strip().lower()
+            sub_choice = input(
+                "Enter your exact program choice: ").strip().lower()
             if sub_choice in ["1", "main", "example"]:
                 run_loops()
             elif sub_choice in ["2", "all", "run all"]:
@@ -312,14 +339,25 @@ def main():
                 print("Invalid choice. Please try again.")
                 continue
 
-        elif choice in ["6", "all", "run all"]:
+        elif choice in ["6", "functions", "function"]:
+            show_sub_menu("Functions")
+            sub_choice = input(
+                "Enter your exact program choice: ").strip().lower()
+            if sub_choice in ["1", "main", "example", "2", "all", "run all"]:
+                run_functions()
+            else:
+                print("Invalid choice. Please try again.")
+                continue
+
+        elif choice in ["7", "all", "run all"]:
             run_all()
 
         else:
-            print("Invalid topic choice. Please choose a number from 1 to 7.")
+            print("Invalid topic choice. Please choose a number from 1 to 8.")
             continue
 
-        again = input("\nDo you want to choose another program? (y/n): ").strip().lower()
+        again = input(
+            "\nDo you want to choose another program? (y/n): ").strip().lower()
         if again not in ["y", "yes"]:
             print("Goodbye!")
             return
@@ -426,7 +464,7 @@ multiply(2, 3)
 # ⬅️ Parameters are numbers. Arguments are the values that are passed to the function when it is called. In this case, the arguments are 2, 3, 4, 5.
 def multiply(*numbers):
     # The numbers are plural so we can have any number of arguments.The * before the parameter name means that the function can take any number of arguments and they will be stored in a tuple called numbers.
-    return x * y
+    return numbers
 
 
 multiply(2, 3, 4, 5)
@@ -470,8 +508,7 @@ weight = mass * gravity
 print(weight, 'N')                         # Adding unit to the weight
 print("----------------------------------------------------------------------------------------")
 # Factorals⬇️
-import math
 
 fa = int(input(""))
 result = math.factorial(fa)
-print(result)  
+print(result)

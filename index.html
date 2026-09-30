@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Run beginner Python examples directly in your browser with Python Learn.">
+    <title>Python Learn | Run Python in Your Browser</title>
+    <style>
+        :root {
+            --ink: #17211b;
+            --muted: #627067;
+            --paper: #f5f7ef;
+            --panel: #ffffff;
+            --line: #dbe4d8;
+            --green: #176b4d;
+            --green-dark: #0d4935;
+            --yellow: #f4c95d;
+            --output: #17251e;
+            --shadow: 0 18px 50px rgba(23, 33, 27, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        body::before {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            content: "";
+            opacity: 0.45;
+            background: radial-gradient(circle at 15% 10%, #fff4cb 0 12%, transparent 35%),
+                linear-gradient(135deg, transparent 0 58%, #e5efe4 58% 100%);
+        }
+
+        .page {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 28px 0 72px;
+        }
+
+        .brand {
+            color: var(--green-dark);
+            font-weight: bold;
+            font-size: 1.05rem;
+            letter-spacing: 0;
+        }
+
+        .status {
+            color: var(--muted);
+            font: 0.85rem/1.2 Arial, sans-serif;
+        }
+
+        .status::before {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-right: 8px;
+            border-radius: 50%;
+            background: var(--yellow);
+            content: "";
+        }
+
+        .intro {
+            max-width: 760px;
+            margin-bottom: 34px;
+        }
+
+        h1 {
+            max-width: 740px;
+            margin: 0 0 18px;
+            color: var(--green-dark);
+            font-size: clamp(2.7rem, 7vw, 5.7rem);
+            line-height: 0.95;
+            letter-spacing: 0;
+        }
+
+        .intro p {
+            max-width: 620px;
+            margin: 0;
+            color: var(--muted);
+            font: 1.08rem/1.6 Arial, sans-serif;
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+            gap: 18px;
+            margin-bottom: 26px;
+        }
+
+        .editor-panel,
+        .output-panel {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--panel);
+            box-shadow: var(--shadow);
+        }
+
+        .panel-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--line);
+            font: 700 0.8rem/1 Arial, sans-serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .file-label {
+            color: var(--muted);
+            font: 0.78rem/1.2 monospace;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        textarea {
+            display: block;
+            width: 100%;
+            min-height: 390px;
+            padding: 20px;
+            resize: vertical;
+            border: 0;
+            outline: 0;
+            color: #e9f4e7;
+            background: #20372c;
+            font: 0.96rem/1.65 "SFMono-Regular", Consolas, monospace;
+            tab-size: 4;
+        }
+
+        textarea:focus {
+            box-shadow: inset 0 0 0 2px var(--yellow);
+        }
+
+        pre {
+            min-height: 390px;
+            margin: 0;
+            padding: 20px;
+            overflow: auto;
+            white-space: pre-wrap;
+            color: #eff8e9;
+            background: var(--output);
+            font: 0.92rem/1.65 "SFMono-Regular", Consolas, monospace;
+        }
+
+        .output-empty {
+            color: #99ae9d;
+        }
+
+        .panel-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 18px;
+            border-top: 1px solid var(--line);
+        }
+
+        button {
+            cursor: pointer;
+            border: 0;
+            border-radius: 5px;
+            padding: 11px 18px;
+            color: #fff;
+            background: var(--green);
+            font: 700 0.9rem/1 Arial, sans-serif;
+        }
+
+        button:hover {
+            background: var(--green-dark);
+        }
+
+        button:disabled {
+            cursor: wait;
+            opacity: 0.55;
+        }
+
+        .hint {
+            color: var(--muted);
+            font: 0.78rem/1.3 Arial, sans-serif;
+        }
+
+        .note {
+            margin: 0 0 54px;
+            color: var(--muted);
+            font: 0.84rem/1.5 Arial, sans-serif;
+        }
+
+        code {
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: var(--green-dark);
+            background: #e4eee2;
+            font-family: monospace;
+        }
+
+        @media (max-width: 760px) {
+            header {
+                padding-bottom: 48px;
+            }
+
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+
+            textarea,
+            pre {
+                min-height: 300px;
+            }
+
+            .panel-actions {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <header>
+            <div class="brand">PYTHON LEARN / PLAYGROUND</div>
+            <div class="status" id="status">Loading Python...</div>
+        </header>
+
+        <main>
+            <section class="intro">
+                <h1>Learn by running the code.</h1>
+                <p>Try small Python examples right here in your browser. Change the values, run the program, and see
+                    what happens.</p>
+            </section>
+
+            <section class="workspace" aria-label="Python code playground">
+                <div class="editor-panel">
+                    <div class="panel-heading"><span>Editor</span><span class="file-label">main.py</span></div>
+                    <textarea id="code" spellcheck="false" aria-label="Python code">name = "Python learner"
+lessons_completed = 3
+
+print(f"Hello, {name}!")
+print(f"You have completed {lessons_completed} lessons.")
+
+for lesson in range(1, 4):
+    print(f"Lesson {lesson}: keep experimenting!")</textarea>
+                    <div class="panel-actions">
+                        <button id="run" type="button" disabled>Loading Python...</button>
+                        <span class="hint">Run with Ctrl + Enter</span>
+                    </div>
+                </div>
+
+                <div class="output-panel">
+                    <div class="panel-heading"><span>Output</span><span class="file-label">console</span></div>
+                    <pre id="output"
+                        aria-live="polite"><span class="output-empty">Your output will appear here.</span></pre>
+                    <div class="panel-actions"><span class="hint">Python runs locally in your browser.</span><button
+                            id="clear" type="button">Clear</button></div>
+                </div>
+            </section>
+
+            <p class="note">This playground uses <code>Pyodide</code> to run Python through WebAssembly. It does not
+                send your code to a server. Browser input with <code>input()</code> is not supported yet.</p>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+    <script>
+        const code = document.querySelector("#code");
+        const output = document.querySelector("#output");
+        const runButton = document.querySelector("#run");
+        const clearButton = document.querySelector("#clear");
+        const status = document.querySelector("#status");
+        let pyodide;
+
+        function showOutput(text, isError = false) {
+            output.textContent = text || "No output. Add a print() statement and run again.";
+            output.style.color = isError ? "#ffb4a8" : "";
+        }
+
+        async function startPython() {
+            try {
+                pyodide = await loadPyodide();
+                status.textContent = "Python ready";
+                runButton.disabled = false;
+                runButton.textContent = "Run code";
+            } catch (error) {
+                status.textContent = "Python could not load";
+                showOutput(error.toString(), true);
+            }
+        }
+
+        async function runCode() {
+            if (!pyodide) return;
+            runButton.disabled = true;
+            runButton.textContent = "Running...";
+            status.textContent = "Running Python";
+            try {
+                pyodide.setStdout({ batched: showOutput });
+                pyodide.setStderr({ batched: (text) => showOutput(text, true) });
+                await pyodide.runPythonAsync(code.value);
+                status.textContent = "Python ready";
+            } catch (error) {
+                showOutput(error.toString(), true);
+                status.textContent = "There was an error";
+            } finally {
+                runButton.disabled = false;
+                runButton.textContent = "Run code";
+            }
+        }
+
+        runButton.addEventListener("click", runCode);
+        clearButton.addEventListener("click", () => showOutput(""));
+        code.addEventListener("keydown", (event) => {
+            if (event.ctrlKey && event.key === "Enter") runCode();
+        });
+        startPython();
+    </script>
+</body>
+
+</html>
